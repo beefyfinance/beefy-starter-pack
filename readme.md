@@ -1,5 +1,5 @@
-# Beefy Contracts
-Official repo for all the strategies and vaults from Beefy. Community strategists can contribute here to grow the ecosystem.
+# Beefy Starter Pack 
+A minimal smart contract repo to get started deploying vaults on [beefy.finance](https://app.beefy.finance).
 
 ## Vault Deployment Process
 ### 1. Select a farm
