@@ -24,7 +24,7 @@ You should always review the third party code looking for potential exploits or 
 If you're doing something completely custom you should add automated tests to facilitate review and diminish risks. If it's a copy/paste from another strategy you can get by with manual testing for now as everything has been battle tested tested quite a bit. 
 
 ### 3. Deploy the smart contracts
-Once you are confident that everything works as expected you can do the official deploy of the vault + strategy contracts. There are [some scripts](https://github.com/beefyfinance/beefy-contracts/blob/master/scripts/) to help make deploying easier. 
+Once you are confident that everything works as expected you can do the official deploy of the vault + strategy contracts. There are [some scripts](https://github.com/beefyfinance/beefy-starter-pack/tree/master/scripts) to help make deploying easier. 
 Once you're sure the production contracts work as expected you should call 
 `transferOwnership()`on both the strategy and vault contract and give the ownership to the official Beefy account at `0xd529b1894491a0a26B18939274ae8ede93E81dbA` 
 This is required so that we can review everything before the vault is actually live on the app and manage it after its live.
