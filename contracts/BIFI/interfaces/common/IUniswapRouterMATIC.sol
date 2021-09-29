@@ -2,7 +2,7 @@
 
 pragma solidity ^0.6.0;
 
-interface IUniswapRouterETH {
+interface IUniswapRouterMATIC {
     function addLiquidity(
         address tokenA,
         address tokenB,
@@ -14,14 +14,14 @@ interface IUniswapRouterETH {
         uint deadline
     ) external returns (uint amountA, uint amountB, uint liquidity);
 
-    function addLiquidityETH(
+    function addLiquidityMATIC(
         address token,
         uint amountTokenDesired,
         uint amountTokenMin,
-        uint amountETHMin,
+        uint amountMATICMin,
         address to,
         uint deadline
-    ) external payable returns (uint amountToken, uint amountETH, uint liquidity);
+    ) external payable returns (uint amountToken, uint amountMATIC, uint liquidity);
 
     function removeLiquidity(
         address tokenA,
@@ -33,14 +33,14 @@ interface IUniswapRouterETH {
         uint deadline
     ) external returns (uint amountA, uint amountB);
 
-    function removeLiquidityETH(
+    function removeLiquidityMATIC(
         address token,
         uint liquidity,
         uint amountTokenMin,
-        uint amountETHMin,
+        uint amountMATICMin,
         address to,
         uint deadline
-    ) external returns (uint amountToken, uint amountETH);
+    ) external returns (uint amountToken, uint amountMATIC);
 
     function swapExactTokensForTokens(
         uint amountIn, 
@@ -50,14 +50,12 @@ interface IUniswapRouterETH {
         uint deadline
     ) external returns (uint[] memory amounts);
 
-    function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
+    function swapExactMATICForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
         external
         payable
         returns (uint[] memory amounts);
     
-    function swapExactTokensForETH(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
+    function swapExactTokensForMATIC(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
         external
         returns (uint[] memory amounts);
-
-    function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
 }
