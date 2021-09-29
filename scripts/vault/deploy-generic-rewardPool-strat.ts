@@ -4,7 +4,7 @@ import { predictAddresses } from "../../utils/predictAddresses";
 import { setCorrectCallFee } from "../../utils/setCorrectCallFee";
 import { verifyContracts } from "../../utils/verifyContracts";
 
-const registerSubsidy = require("../../utils/registerSubsidy");
+// const registerSubsidy = require("../../utils/registerSubsidy");
 
 const {
   WMATIC_DFYN: { address: WMATIC_DFYN },
@@ -103,10 +103,10 @@ async function main() {
   await setCorrectCallFee(strategy, hardhat.network.name);
   console.log();
 
-  if (hardhat.network.name === "bsc") {
-    await registerSubsidy(vault.address, deployer);
-    await registerSubsidy(strategy.address, deployer);
-  }
+  // if (hardhat.network.name === "bsc") {
+  //   await registerSubsidy(vault.address, deployer);
+  //   await registerSubsidy(strategy.address, deployer);
+  // }
 }
 
 main()
