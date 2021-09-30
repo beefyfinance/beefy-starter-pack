@@ -207,10 +207,19 @@ contract StrategyCommonRewardPoolLP is StratManager, FeeManager {
     }
 
     // returns native reward for calling harvest
-    function callReward() external view returns (uint256) {
+    function callReward() public view returns (uint256) {
         uint256 outputBal = rewardsAvailable();
-        uint256[] memory amountsOut = IUniswapRouterETH(unirouter).getAmountsOut(outputBal, outputToNativeRoute);
-        return amountsOut[amountsOut.length - 1].mul(45).div(1000).mul(callFee).div(MAX_FEE);
+        uint256 nativeOut;
+        if (outputBal > 0) {
+            try IUniswapRouterETH(unirouter).getAmountsOut(outputBal, outputToNativeRoute)
+                returns (uint256[] memory amountOut) 
+            {
+                nativeOut = amountOut[amountOut.length -1];
+            }
+            catch {}
+        }
+
+        return nativeOut.mul(45).div(1000).mul(callFee).div(MAX_FEE);
     }
 
     // called as part of strat migration. Sends all the available funds back to the vault.
