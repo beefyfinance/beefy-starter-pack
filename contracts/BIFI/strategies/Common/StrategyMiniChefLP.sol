@@ -12,6 +12,7 @@ import "../../interfaces/sushi/IMiniChefV2.sol";
 import "../../interfaces/sushi/IRewarder.sol";
 import "../Common/StratManager.sol";
 import "../Common/FeeManager.sol";
+import "../../utils/StringUtils.sol";
 
 contract StrategyMiniChefLP is StratManager, FeeManager {
     using SafeERC20 for IERC20;
@@ -33,6 +34,7 @@ contract StrategyMiniChefLP is StratManager, FeeManager {
 
     uint256 public lastHarvest;
     bool public harvestOnDeposit;
+    string public pendingRewardsFunctionName;
 
     // Routes
     address[] public outputToNativeRoute;
@@ -222,7 +224,16 @@ contract StrategyMiniChefLP is StratManager, FeeManager {
 
     // returns rewards unharvested
     function rewardsAvailable() public view returns (uint256) {
-        return IMiniChefV2(chef).pendingSushi(poolId, address(this));
+        string memory signature = StringUtils.concat(pendingRewardsFunctionName, "(uint256,address)");
+        bytes memory result = Address.functionStaticCall(
+            chef, 
+            abi.encodeWithSignature(
+                signature,
+                poolId,
+                address(this)
+            )
+        );  
+        return abi.decode(result, (uint256));
     }
 
     // native reward amount for calling harvest
