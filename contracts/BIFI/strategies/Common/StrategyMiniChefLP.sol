@@ -222,6 +222,10 @@ contract StrategyMiniChefLP is StratManager, FeeManager {
         IERC20(want).transfer(vault, wantBal);
     }
 
+    function setPendingRewardsFunctionName(string calldata _pendingRewardsFunctionName) external onlyManager {
+        pendingRewardsFunctionName = _pendingRewardsFunctionName;
+    }
+
     // returns rewards unharvested
     function rewardsAvailable() public view returns (uint256) {
         string memory signature = StringUtils.concat(pendingRewardsFunctionName, "(uint256,address)");
